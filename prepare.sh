@@ -19,3 +19,7 @@ wait
 
 # Print success message
 echo "OK, INITIAL PREPARATION DONE"
+
+# Invoke Python script for further installation
+echo "Running Python installation script..."
+python3 setup.py
