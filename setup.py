@@ -130,4 +130,4 @@ run_command('apt remove -y telnet pastebinit netcat')
 #    logging.error(f'Error running apt autoremove: {stderr}')
 #
 logging.info('Step 12: Rebooting the system')
-run_command('reboot')
+# run_command('reboot')
