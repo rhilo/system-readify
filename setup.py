@@ -120,14 +120,14 @@ logging.info('Step 11: Removing packages')
 run_command('apt remove -y telnet pastebinit netcat')
 
 # Step 12: Run apt autoremove and reboot
-logging.info('Step 12: Running apt autoremove')
+#logging.info('Step 12: Running apt autoremove')
 #run_command('apt autoremove -y')
-return_code, stdout, stderr = run_command_with_input('apt autoremove', 'y\n')
-
-if return_code == 0:
-    logging.info('APT Autoremove completed successfully')
-else:
-    logging.error(f'Error running apt autoremove: {stderr}')
-
-logging.info('Step 13: Rebooting the system')
+#return_code, stdout, stderr = run_command_with_input('apt autoremove', 'y\n')
+#
+#if return_code == 0:
+#    logging.info('APT Autoremove completed successfully')
+#else:
+#    logging.error(f'Error running apt autoremove: {stderr}')
+#
+logging.info('Step 12: Rebooting the system')
 run_command('reboot')
