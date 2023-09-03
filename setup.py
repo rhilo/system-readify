@@ -13,12 +13,12 @@ def run_command(command):
         result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         if result.returncode == 0:
             logging.info(f'Success: {command}')
-            print(f'Success: {command}')
+            print(f'Subcommand Success: {command}')
         else:
             logging.error(f'Error ({result.returncode}): {command}\n{result.stderr}')
     except Exception as e:
         logging.error(f'Exception: {e}')
-        print(f'Exception: {e}')
+        print(f'Subcommand Exception: {e}')
 
 # Modified run_command function
 def run_command_with_input(command, input_text=None):
@@ -93,9 +93,9 @@ print('Step 6: Removing Snapd cache')
 run_command('rm -rf /var/cache/snapd/')
 
 # Step 7: Autoremove Snapd (purge)
-#logging.info('Step 7: Autoremoving Snapd')
-#print('Step 7: Autoremoving Snapd')
-#run_command('apt autoremove --purge snapd')
+logging.info('Step 7: Autoremoving Snapd')
+print('Step 7: Autoremoving Snapd')
+run_command('apt autoremove --purge snapd')
 
 # Step 8: Remove Snap user directory
 logging.info('Step 8: Removing Snap user directory')
@@ -136,4 +136,6 @@ run_command('apt remove -y telnet pastebinit netcat')
 #  Step 12: Run apt autoremove and reboot
 logging.info('Step 12: cleaning up and rebooting')
 print('Step 12: cleaning up and rebooting')
+logging.info('Remember, you must run apt autoremove --purge snapd manually after rebooting')
+print('Remember, you must "run apt autoremove --purge snapd" manually after rebooting')
 run_command('cp installation.log /var/log/system-readify.log')
