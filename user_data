@@ -1,0 +1,36 @@
+#cloud-config
+hostname: prod
+fqdn: prod.vysena.no
+preserve_hostname: true
+prefer_fqdn_over_hostname: true
+timezone: Europe/Oslo
+users:
+  - default
+  - name: chris
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    gecos: Christer Karlsen
+    shell: /bin/bash
+    homedir: /home/chris
+    ssh-authorized-keys:
+      - ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBADRDSRxIab2A3hxw2N98Oen6J6n6TJi+led2YXsaUz7YXhIeOnfnK7UaFPsrrg53jBYSLjUVehI24GHkpwX7s1VvwHH9rU7+3VZ6T8rwjD3Xg7N4F33QrVxBKy7M9yAclSpVXD5c/gBg5eWkg4DF1Iv3l0HG8Yysl/I1lWFG39hL09l5Q== ecdsa-key-20230815
+  - name: andre
+    sudo: false
+    gecos: Andre Nilsen
+    shell: /bin/bash
+    homedir: /home/andre
+    ssh-authorized-keys:
+      - ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBABXMXZXP4GiNN/0xMDerht5KgcSki6loGKMV667EF2W85AANGhXzQFYPBcqXUhdy0kBzUdVPHw46wTPYMRy3KEiKADu+C7IN0Oht+TyJ6+XGqREvVRRud2g51XpBgx7Dt2mATPEuMB699T3Det0ZU/zy/K+76VU7UGe/p0lL7wzh2KN7w== ecdsa-key-20230903
+packages:
+  - chkrootkit
+  - fail2ban
+  - monit
+  - btop
+package_update: true
+package_upgrade: true
+byobu_by_default: enable-user
+runcmd:
+    - [ git, clone, "https://github.com/rhilo/system-readify.git", /root/system-readify ]
+    - chmod +x /root/system-readify/setup.py
+    - python3 /root/system-readify/setup.py
+    - apt autoremove --purge snapd -y
+    - reboot

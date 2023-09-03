@@ -13,12 +13,12 @@ def run_command(command):
         result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         if result.returncode == 0:
             logging.info(f'Success: {command}')
-            print(f'Subcommand Success: {command}')
+            print(f'Success: {command}')
         else:
             logging.error(f'Error ({result.returncode}): {command}\n{result.stderr}')
     except Exception as e:
         logging.error(f'Exception: {e}')
-        print(f'Subcommand Exception: {e}')
+        print(f'Exception: {e}')
 
 # Modified run_command function
 def run_command_with_input(command, input_text=None):
@@ -93,9 +93,9 @@ print('Step 6: Removing Snapd cache')
 run_command('rm -rf /var/cache/snapd/')
 
 # Step 7: Autoremove Snapd (purge)
-logging.info('Step 7: Autoremoving Snapd')
-print('Step 7: Autoremoving Snapd')
-run_command('apt autoremove --purge snapd')
+#logging.info('Step 7: Autoremoving Snapd')
+#print('Step 7: Autoremoving Snapd')
+#run_command('apt autoremove --purge snapd')
 
 # Step 8: Remove Snap user directory
 logging.info('Step 8: Removing Snap user directory')
